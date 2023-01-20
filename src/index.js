@@ -14,6 +14,8 @@ const form = document.querySelector('#search-form');
 const gallery = document.querySelector('.gallery');
 const guard = document.querySelector('.js-guard');
 
+
+
 let pageNow = 0;
 const totalPages= 40;
 let inputVal = '';
@@ -31,6 +33,7 @@ form.addEventListener('submit', onSubmit);
 
 
 async function onSubmit (evt) {
+    observer.unobserve(guard);
     gallery.innerHTML = '';
     evt.preventDefault();
     pageNow = 1
@@ -66,6 +69,7 @@ async function onInfinityScroll(entr,obs){
         if(maxCard >=1){    
         obs.unobserve(guard);
         Notify.info("We're sorry, but you've reached the end of search results.");
+
 } else{
     gallery.insertAdjacentHTML('beforeend',createMarkup(getApiArr.hits));
         lightbox.refresh();
