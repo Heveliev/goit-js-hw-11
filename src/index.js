@@ -17,7 +17,7 @@ const guard = document.querySelector('.js-guard');
 
 
 let pageNow = 0;
-const totalPages= 40;
+const totalCard = 40;
 let inputVal = '';
 
 const optionsInfinityScroll = {
@@ -45,7 +45,7 @@ if (!inputVal) {
 }
 
 try {
- const getApiArr = await getApi(inputVal,pageNow,totalPages);
+ const getApiArr = await getApi(inputVal,pageNow,totalCard);
 if (!getApiArr.total) {
     Notify.failure('Sorry, there are no images matching your search query. Please try again.')
     return
@@ -61,10 +61,10 @@ lightbox.refresh();
 async function onInfinityScroll(entr,obs){
     pageNow +=1;
 
-    const getApiArr = await getApi(inputVal,pageNow,totalPages);
-    const maxCard = pageNow * totalPages / getApiArr.totalHits;
+    const getApiArr = await getApi(inputVal,pageNow,totalCard);
+    const maxCard = pageNow * totalCard / getApiArr.totalHits;
     entr.forEach(ent => {
-        if (inputVal === inputVal){if(ent.isIntersecting){
+        if(ent.isIntersecting){
     try { 
         if(maxCard >=1){    
         obs.unobserve(guard);
@@ -86,6 +86,6 @@ const { height: cardHeight } = document
     }
     catch (err) {console.log(err)}
 } 
-    }});
+    });
 
 };
